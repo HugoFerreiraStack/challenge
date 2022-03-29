@@ -1,3 +1,4 @@
+import 'package:challenge/app/shared/constants/assets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:challenge/app/modules/splash/splash_store.dart';
 import 'package:flutter/material.dart';
@@ -8,17 +9,22 @@ class SplashPage extends StatefulWidget {
   @override
   SplashPageState createState() => SplashPageState();
 }
+
 class SplashPageState extends State<SplashPage> {
   final SplashStore store = Modular.get();
 
   @override
+  void initState() {
+    super.initState();
+    store.nextModule();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Column(
-        children: <Widget>[],
+      backgroundColor: Colors.white,
+      body: Center(
+        child: SizedBox(height: 100, child: Image.asset(AppAssets.logo)),
       ),
     );
   }

@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:challenge/app/modules/home/widgets/custom_appbar_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -14,18 +17,22 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends ModularState<HomePage, HomeStore> {
   @override
+  void initState() {
+    store.getAccessToken().then((value) {
+      value.fold((l) => log(l), (r) => store.setToken(r));
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Counter'),
-      ),
+      appBar: CustomAppBarWidget(),
       body: Observer(
-        builder: (context) => Text('${store.counter}'),
+        builder: (context) => Text(''),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          store.increment();
-        },
+        onPressed: () {},
         child: Icon(Icons.add),
       ),
     );
