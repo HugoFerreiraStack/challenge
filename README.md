@@ -1,16 +1,21 @@
 # challenge
 
-A new Flutter project.
+Projeto desenvolvido para teste de habilidades para a Mobile2You
 
-## Getting Started
+Replicar tela de detalhes do app TodoMovies
 
-This project is a starting point for a Flutter application.
+## Tecnologias e bibliotecas utilizadas no projeto
 
-A few resources to get you started if this is your first Flutter project:
+- [Versão do flutter: 2.10.3](https://docs.flutter.dev/development/tools/sdk/releases)
+- [Gerenciamento de estado: flutter mobx 2.0.6+1](https://pub.dev/packages/flutter_mobx)
+- [flutter modular 4.5.0]
+- [Slidy 3.2.2]
+- [dio 4.0.5](https://pub.dev/packages/dio)
+- [dartz 0.10.1](https://pub.dev/packages/dartz)
+- [json annotation 4.4.0](https://pub.dev/packages/json_annotation)
+- [json serializable 6.1.4](https://pub.dev/packages/json_serializable/versions/6.1.4)
+- [auto size text 3.0.0](https://pub.dev/packages/auto_size_text)
+- [mobx codegen 2.0.5+2 ]
+- [build runner 2.1.7]
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

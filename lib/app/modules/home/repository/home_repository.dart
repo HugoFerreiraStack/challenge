@@ -21,7 +21,6 @@ class HomeRepository implements HomeInterface {
         return Left(response.data['status_message']);
       } else {
         return Left(response.data['Failed to connect api']);
-        ;
       }
     } catch (e) {
       return Left(e.toString());

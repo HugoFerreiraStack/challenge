@@ -1,5 +1,5 @@
-class AutoGenerate {
-  AutoGenerate({
+class Movie {
+  Movie({
     required this.adult,
     required this.backdropPath,
     required this.budget,
@@ -50,7 +50,7 @@ class AutoGenerate {
   late final double? voteAverage;
   late final int? voteCount;
 
-  AutoGenerate.fromJson(Map<String, dynamic> json) {
+  Movie.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     budget = json['budget'];

@@ -1,10 +1,12 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:developer';
 
-import 'package:challenge/app/modules/home/widgets/custom_appbar_widget.dart';
+import 'package:challenge/app/modules/home/widgets/poster_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../shared/constants/app_colors.dart';
 import 'home_store.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,14 +28,11 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: CustomAppBarWidget(),
-      body: Observer(
-        builder: (context) => Text(''),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: Icon(Icons.add),
+      backgroundColor: Colors.black,
+      body: CustomScrollView(
+        slivers: [PosterWidget(url: 'url')],
       ),
     );
   }

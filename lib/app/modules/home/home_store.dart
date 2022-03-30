@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:challenge/app/shared/constants/api.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
-
+import '../../shared/models/movie.dart';
 import 'repository/home_interface.dart';
-
 part 'home_store.g.dart';
 
 class HomeStore = HomeStoreBase with _$HomeStore;
@@ -21,7 +18,6 @@ abstract class HomeStoreBase with Store {
   @action
   void setToken(String value) {
     accessToken = value;
-    log(accessToken!);
   }
 
   @observable
@@ -36,5 +32,13 @@ abstract class HomeStoreBase with Store {
   bool get isLoadingToken {
     if (getAccess == null) return false;
     return getAccess!.status == FutureStatus.pending;
+  }
+
+  @observable
+  late Movie? movie;
+
+  @action
+  void setMovie(Movie value) {
+    movie = value;
   }
 }
