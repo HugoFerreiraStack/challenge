@@ -79,11 +79,15 @@ class _HomePageState extends ModularState<HomePage, HomeStore> {
       }
     }
     return Row(
-        children: List.generate(
-            generos.length,
-            (index) => Padding(
-                padding: const EdgeInsets.only(right: 5.0),
-                child: Text(generos[index].name!))));
+      children: List.generate(
+        generos.length,
+        (index) => Padding(
+          padding: const EdgeInsets.only(right: 5.0),
+          child: Text(generos[index].name! +
+              (generos[index] == generos.last ? '' : ',')),
+        ),
+      ),
+    );
   }
 
   Widget buildBody(Movie? movie) {

@@ -46,9 +46,10 @@ class PosterWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             SizedBox(
-              width: size.width / 4,
+              width: size.width / 2,
               child: AutoSizeText(
                 movie.originalTitle!,
+                maxFontSize: 18,
                 maxLines: 2,
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
