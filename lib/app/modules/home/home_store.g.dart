@@ -114,6 +114,21 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  final _$genresAtom = Atom(name: 'HomeStoreBase.genres');
+
+  @override
+  ObservableList<Genres> get genres {
+    _$genresAtom.reportRead();
+    return super.genres;
+  }
+
+  @override
+  set genres(ObservableList<Genres> value) {
+    _$genresAtom.reportWrite(value, super.genres, () {
+      super.genres = value;
+    });
+  }
+
   final _$getSimilarsMoviesAsyncAction =
       AsyncAction('HomeStoreBase.getSimilarsMovies');
 
@@ -181,6 +196,17 @@ mixin _$HomeStore on HomeStoreBase, Store {
   }
 
   @override
+  void updateListGenres(List<Genres> value) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.updateListGenres');
+    try {
+      return super.updateListGenres(value);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 accessToken: ${accessToken},
@@ -189,6 +215,7 @@ movie: ${movie},
 isLiked: ${isLiked},
 similarsMovies: ${similarsMovies},
 moviesList: ${moviesList},
+genres: ${genres},
 isLoadingToken: ${isLoadingToken},
 isLoadingMovies: ${isLoadingMovies}
     ''';

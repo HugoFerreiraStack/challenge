@@ -16,6 +16,13 @@ mixin _$SplashStore on _SplashStoreBase, Store {
       (_$isLoadingTokenComputed ??= Computed<bool>(() => super.isLoadingToken,
               name: '_SplashStoreBase.isLoadingToken'))
           .value;
+  Computed<bool>? _$isLoadingGenresComputed;
+
+  @override
+  bool get isLoadingGenres =>
+      (_$isLoadingGenresComputed ??= Computed<bool>(() => super.isLoadingGenres,
+              name: '_SplashStoreBase.isLoadingGenres'))
+          .value;
 
   final _$getAccessAtom = Atom(name: '_SplashStoreBase.getAccess');
 
@@ -30,6 +37,28 @@ mixin _$SplashStore on _SplashStoreBase, Store {
     _$getAccessAtom.reportWrite(value, super.getAccess, () {
       super.getAccess = value;
     });
+  }
+
+  final _$genresAtom = Atom(name: '_SplashStoreBase.genres');
+
+  @override
+  ObservableFuture<Either<String, List<Genres>>>? get genres {
+    _$genresAtom.reportRead();
+    return super.genres;
+  }
+
+  @override
+  set genres(ObservableFuture<Either<String, List<Genres>>>? value) {
+    _$genresAtom.reportWrite(value, super.genres, () {
+      super.genres = value;
+    });
+  }
+
+  final _$getGenresAsyncAction = AsyncAction('_SplashStoreBase.getGenres');
+
+  @override
+  Future<Either<String, List<Genres>>> getGenres() {
+    return _$getGenresAsyncAction.run(() => super.getGenres());
   }
 
   final _$_SplashStoreBaseActionController =
@@ -61,7 +90,9 @@ mixin _$SplashStore on _SplashStoreBase, Store {
   String toString() {
     return '''
 getAccess: ${getAccess},
-isLoadingToken: ${isLoadingToken}
+genres: ${genres},
+isLoadingToken: ${isLoadingToken},
+isLoadingGenres: ${isLoadingGenres}
     ''';
   }
 }

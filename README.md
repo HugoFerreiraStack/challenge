@@ -17,5 +17,6 @@ Replicar tela de detalhes do app TodoMovies
 - [auto size text 3.0.0](https://pub.dev/packages/auto_size_text)
 - [mobx codegen 2.0.5+2 ]
 - [build runner 2.1.7]
+- [font awesome flutter 10.1.0](https://pub.dev/packages/font_awesome_flutter)
 
 
