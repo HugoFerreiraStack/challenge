@@ -70,26 +70,11 @@ class PosterWidget extends StatelessWidget {
             )
           ],
         ),
-        background: Container(
-          foregroundDecoration: BoxDecoration(
-            color: Colors.grey,
-            backgroundBlendMode: BlendMode.saturation,
-            gradient: LinearGradient(
-              begin: FractionalOffset.topCenter,
-              end: FractionalOffset.bottomCenter,
-              colors: [
-                Color(0xFF808080).withOpacity(0.0),
-                AppColors.black,
-              ],
-              stops: const [0.0, 1.0],
-            ),
-          ),
-          child: Image.network(
-            Api.BASE_IMAGE_URL + movie.posterPath!,
-            width: size.width,
-            fit: BoxFit.fill,
-            filterQuality: FilterQuality.high,
-          ),
+        background: Image.network(
+          Api.BASE_IMAGE_URL + movie.posterPath!,
+          width: size.width,
+          fit: BoxFit.fill,
+          filterQuality: FilterQuality.high,
         ),
       ),
     );
