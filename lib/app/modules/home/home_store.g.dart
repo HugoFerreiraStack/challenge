@@ -16,6 +16,13 @@ mixin _$HomeStore on HomeStoreBase, Store {
       (_$isLoadingTokenComputed ??= Computed<bool>(() => super.isLoadingToken,
               name: 'HomeStoreBase.isLoadingToken'))
           .value;
+  Computed<bool>? _$isLoadingMoviesComputed;
+
+  @override
+  bool get isLoadingMovies =>
+      (_$isLoadingMoviesComputed ??= Computed<bool>(() => super.isLoadingMovies,
+              name: 'HomeStoreBase.isLoadingMovies'))
+          .value;
 
   final _$accessTokenAtom = Atom(name: 'HomeStoreBase.accessToken');
 
@@ -62,6 +69,59 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
+  final _$isLikedAtom = Atom(name: 'HomeStoreBase.isLiked');
+
+  @override
+  bool get isLiked {
+    _$isLikedAtom.reportRead();
+    return super.isLiked;
+  }
+
+  @override
+  set isLiked(bool value) {
+    _$isLikedAtom.reportWrite(value, super.isLiked, () {
+      super.isLiked = value;
+    });
+  }
+
+  final _$similarsMoviesAtom = Atom(name: 'HomeStoreBase.similarsMovies');
+
+  @override
+  ObservableFuture<Either<String, List<Results>>>? get similarsMovies {
+    _$similarsMoviesAtom.reportRead();
+    return super.similarsMovies;
+  }
+
+  @override
+  set similarsMovies(ObservableFuture<Either<String, List<Results>>>? value) {
+    _$similarsMoviesAtom.reportWrite(value, super.similarsMovies, () {
+      super.similarsMovies = value;
+    });
+  }
+
+  final _$moviesListAtom = Atom(name: 'HomeStoreBase.moviesList');
+
+  @override
+  ObservableList<Results> get moviesList {
+    _$moviesListAtom.reportRead();
+    return super.moviesList;
+  }
+
+  @override
+  set moviesList(ObservableList<Results> value) {
+    _$moviesListAtom.reportWrite(value, super.moviesList, () {
+      super.moviesList = value;
+    });
+  }
+
+  final _$getSimilarsMoviesAsyncAction =
+      AsyncAction('HomeStoreBase.getSimilarsMovies');
+
+  @override
+  Future<Either<String, List<Results>>> getSimilarsMovies() {
+    return _$getSimilarsMoviesAsyncAction.run(() => super.getSimilarsMovies());
+  }
+
   final _$HomeStoreBaseActionController =
       ActionController(name: 'HomeStoreBase');
 
@@ -99,12 +159,38 @@ mixin _$HomeStore on HomeStoreBase, Store {
   }
 
   @override
+  void setIsLiked(bool value) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.setIsLiked');
+    try {
+      return super.setIsLiked(value);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void updateListMovies(List<Results> value) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.updateListMovies');
+    try {
+      return super.updateListMovies(value);
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 accessToken: ${accessToken},
 getMovie: ${getMovie},
 movie: ${movie},
-isLoadingToken: ${isLoadingToken}
+isLiked: ${isLiked},
+similarsMovies: ${similarsMovies},
+moviesList: ${moviesList},
+isLoadingToken: ${isLoadingToken},
+isLoadingMovies: ${isLoadingMovies}
     ''';
   }
 }

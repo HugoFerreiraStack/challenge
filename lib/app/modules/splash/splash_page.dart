@@ -23,7 +23,10 @@ class SplashPageState extends State<SplashPage> {
     store.getAccessToken().then((value) {
       value.fold((l) => log(l), (r) {
         homeStore.setToken(r);
-        store.nextModule();
+        store.getGenres().then((value) => value.fold((l) => log(l), (r) {
+              homeStore.updateListGenres(r);
+              store.nextModule();
+            }));
       });
     });
   }

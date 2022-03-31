@@ -22,6 +22,8 @@ dependencies:
   json_annotation: ^4.4.0
   json_serializable: ^6.1.4
   auto_size_text: ^3.0.0
+  font_awesome_flutter: ^10.1.0
+
   
   
   

@@ -1,4 +1,5 @@
 import 'package:challenge/app/modules/splash/repository/splash_interface.dart';
+import 'package:challenge/app/shared/models/movie.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:mobx/mobx.dart';
@@ -34,5 +35,19 @@ abstract class _SplashStoreBase with Store {
       const Duration(seconds: 4),
       () => Modular.to.pushReplacementNamed('/home/'),
     );
+  }
+
+  @observable
+  ObservableFuture<Either<String, List<Genres>>>? genres;
+
+  @action
+  Future<Either<String, List<Genres>>> getGenres() async {
+    return genres = repository.getGenres(Api.API_KEY).asObservable();
+  }
+
+  @computed
+  bool get isLoadingGenres {
+    if (genres == null) return false;
+    return genres!.status == FutureStatus.pending;
   }
 }

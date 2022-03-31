@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:challenge/app/modules/splash/repository/splash_interface.dart';
+import 'package:challenge/app/shared/models/movie.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
@@ -26,5 +29,29 @@ class SplashRepository implements SplashInterface {
     } catch (e) {
       return Left(e.toString());
     }
+  }
+
+  @override
+  Future<Either<String, List<Genres>>> getGenres(String apiKey) async {
+    List<Genres> genres = <Genres>[];
+
+    try {
+      final response = await client.get(Api.BASE_URL + 'genre/movie/list',
+          queryParameters: {'api_key': apiKey});
+
+      if (response.statusCode == 200) {
+        genres =
+            (response.data as List).map((c) => Genres?.fromJson(c)).toList();
+
+        return Right(genres);
+      } else if (response.statusCode == 400) {
+        return Left('Não autorizado');
+      } else {
+        return Left('Erro ao buscar generos');
+      }
+    } catch (e) {
+      Left(e.toString());
+    }
+    return Right(genres);
   }
 }

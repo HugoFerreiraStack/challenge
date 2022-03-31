@@ -1,12 +1,14 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'dart:ui';
-
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:challenge/app/modules/home/home_store.dart';
 import 'package:challenge/app/shared/constants/api.dart';
 import 'package:challenge/app/shared/constants/app_colors.dart';
 import 'package:challenge/app/shared/models/movie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PosterWidget extends StatelessWidget {
   final Movie movie;
@@ -14,8 +16,10 @@ class PosterWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final HomeStore store = Modular.get();
     var size = MediaQuery.of(context).size;
     return SliverAppBar(
+      collapsedHeight: size.height / 2,
       shadowColor: Colors.transparent,
       leading: Padding(
         padding: EdgeInsets.only(left: 5),
@@ -36,15 +40,34 @@ class PosterWidget extends StatelessWidget {
       floating: false,
       expandedHeight: size.height / 2,
       flexibleSpace: FlexibleSpaceBar(
-        titlePadding: EdgeInsets.only(left: 15, bottom: 15),
+        titlePadding: EdgeInsets.only(left: 15),
         centerTitle: false,
-        title: SizedBox(
-          width: size.width / 3,
-          child: Text(
-            movie.originalTitle!,
-            maxLines: 2,
-            style: TextStyle(fontWeight: FontWeight.bold),
-          ),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(
+              width: size.width / 4,
+              child: AutoSizeText(
+                movie.originalTitle!,
+                maxLines: 2,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                store.setIsLiked(store.isLiked);
+              },
+              icon: Observer(
+                builder: (context) {
+                  return Icon(
+                    FontAwesomeIcons.solidHeart,
+                    color: store.isLiked ? Colors.red : Colors.white,
+                    size: 20,
+                  );
+                },
+              ),
+            )
+          ],
         ),
         background: Image.network(
           Api.BASE_IMAGE_URL + movie.posterPath!,
