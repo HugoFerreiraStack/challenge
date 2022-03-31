@@ -32,18 +32,33 @@ mixin _$HomeStore on HomeStoreBase, Store {
     });
   }
 
-  final _$getAccessAtom = Atom(name: 'HomeStoreBase.getAccess');
+  final _$getMovieAtom = Atom(name: 'HomeStoreBase.getMovie');
 
   @override
-  ObservableFuture<Either<String, String>>? get getAccess {
-    _$getAccessAtom.reportRead();
-    return super.getAccess;
+  ObservableFuture<Either<String, Movie>>? get getMovie {
+    _$getMovieAtom.reportRead();
+    return super.getMovie;
   }
 
   @override
-  set getAccess(ObservableFuture<Either<String, String>>? value) {
-    _$getAccessAtom.reportWrite(value, super.getAccess, () {
-      super.getAccess = value;
+  set getMovie(ObservableFuture<Either<String, Movie>>? value) {
+    _$getMovieAtom.reportWrite(value, super.getMovie, () {
+      super.getMovie = value;
+    });
+  }
+
+  final _$movieAtom = Atom(name: 'HomeStoreBase.movie');
+
+  @override
+  Movie? get movie {
+    _$movieAtom.reportRead();
+    return super.movie;
+  }
+
+  @override
+  set movie(Movie? value) {
+    _$movieAtom.reportWrite(value, super.movie, () {
+      super.movie = value;
     });
   }
 
@@ -62,11 +77,22 @@ mixin _$HomeStore on HomeStoreBase, Store {
   }
 
   @override
-  Future<Either<String, String>> getAccessToken() {
+  Future<Either<String, Movie>> getMovieInformation() {
     final _$actionInfo = _$HomeStoreBaseActionController.startAction(
-        name: 'HomeStoreBase.getAccessToken');
+        name: 'HomeStoreBase.getMovieInformation');
     try {
-      return super.getAccessToken();
+      return super.getMovieInformation();
+    } finally {
+      _$HomeStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setMovie(Movie value) {
+    final _$actionInfo = _$HomeStoreBaseActionController.startAction(
+        name: 'HomeStoreBase.setMovie');
+    try {
+      return super.setMovie(value);
     } finally {
       _$HomeStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -76,7 +102,8 @@ mixin _$HomeStore on HomeStoreBase, Store {
   String toString() {
     return '''
 accessToken: ${accessToken},
-getAccess: ${getAccess},
+getMovie: ${getMovie},
+movie: ${movie},
 isLoadingToken: ${isLoadingToken}
     ''';
   }

@@ -1,6 +1,6 @@
-import 'package:challenge/app/shared/constants/api.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobx/mobx.dart';
+import '../../shared/constants/api.dart';
 import '../../shared/models/movie.dart';
 import 'repository/home_interface.dart';
 part 'home_store.g.dart';
@@ -21,21 +21,21 @@ abstract class HomeStoreBase with Store {
   }
 
   @observable
-  ObservableFuture<Either<String, String>>? getAccess;
+  ObservableFuture<Either<String, Movie>>? getMovie;
 
   @action
-  Future<Either<String, String>> getAccessToken() {
-    return getAccess = repository.getToken(Api.API_KEY).asObservable();
+  Future<Either<String, Movie>> getMovieInformation() {
+    return getMovie = repository.getMovie(Api.API_KEY).asObservable();
   }
 
   @computed
   bool get isLoadingToken {
-    if (getAccess == null) return false;
-    return getAccess!.status == FutureStatus.pending;
+    if (getMovie == null) return false;
+    return getMovie!.status == FutureStatus.pending;
   }
 
   @observable
-  late Movie? movie;
+  Movie? movie;
 
   @action
   void setMovie(Movie value) {

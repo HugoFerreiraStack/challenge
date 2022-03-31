@@ -1,3 +1,6 @@
+import 'dart:developer';
+
+import 'package:challenge/app/modules/home/home_store.dart';
 import 'package:challenge/app/shared/constants/assets.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:challenge/app/modules/splash/splash_store.dart';
@@ -12,11 +15,17 @@ class SplashPage extends StatefulWidget {
 
 class SplashPageState extends State<SplashPage> {
   final SplashStore store = Modular.get();
+  final HomeStore homeStore = Modular.get();
 
   @override
   void initState() {
     super.initState();
-    store.nextModule();
+    store.getAccessToken().then((value) {
+      value.fold((l) => log(l), (r) {
+        homeStore.setToken(r);
+        store.nextModule();
+      });
+    });
   }
 
   @override
